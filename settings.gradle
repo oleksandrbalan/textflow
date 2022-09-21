@@ -13,4 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "TextFlow"
-include ':app'
+include ":demo"
+include ":textflow"
