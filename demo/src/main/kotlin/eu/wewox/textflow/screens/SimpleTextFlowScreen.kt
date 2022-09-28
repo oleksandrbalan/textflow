@@ -22,6 +22,9 @@ import eu.wewox.textflow.ui.theme.SpacingLarge
 import eu.wewox.textflow.ui.theme.SpacingMedium
 import eu.wewox.textflow.ui.theme.SpacingXSmall
 
+/**
+ * Showcases the simple usage of the text flow with an image.
+ */
 @Composable
 fun SimpleTextFlowScreen() {
     Box(

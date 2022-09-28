@@ -22,4 +22,8 @@ enum class Example(
         "Alignment Animation",
         "Alignment change with a scale in-out animation"
     ),
+    AnnotatedString(
+        "Annotated String",
+        "Usage of the annotated string in the text flow"
+    ),
 }

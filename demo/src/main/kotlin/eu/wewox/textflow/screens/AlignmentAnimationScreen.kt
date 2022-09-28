@@ -36,6 +36,9 @@ import eu.wewox.textflow.ui.theme.SpacingXSmall
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 
+/**
+ * Showcases alignment change with a scale in-out animation.
+ */
 @Composable
 fun AlignmentAnimationScreen() {
     Box(

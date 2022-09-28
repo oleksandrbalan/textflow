@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import eu.wewox.textflow.screens.AlignmentAnimationScreen
+import eu.wewox.textflow.screens.AnnotatedStringScreen
 import eu.wewox.textflow.screens.BookChapterScreen
 import eu.wewox.textflow.screens.SimpleTextFlowScreen
 import eu.wewox.textflow.ui.components.TopBar
@@ -57,6 +58,7 @@ class MainActivity : ComponentActivity() {
                         Example.SimpleTextFlow -> SimpleTextFlowScreen()
                         Example.BookChapter -> BookChapterScreen()
                         Example.AlignmentAnimation -> AlignmentAnimationScreen()
+                        Example.AnnotatedString -> AnnotatedStringScreen()
                     }
                 }
             }

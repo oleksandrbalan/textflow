@@ -12,15 +12,16 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import eu.wewox.textflow.R
@@ -30,6 +31,10 @@ import eu.wewox.textflow.ui.theme.SpacingMedium
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 
+/**
+ * Showcases the use-case how text flow can be used to create a Drop Cap (large capital letter used as a decorative
+ * element at the beginning of a paragraph or section).
+ */
 @Composable
 fun BookChapterScreen() {
     Box(
@@ -38,21 +43,8 @@ fun BookChapterScreen() {
             .fillMaxSize()
             .background(MaterialTheme.colors.primary),
     ) {
-        var index by remember { mutableStateOf(1) }
-        LaunchedEffect(Unit) {
-            val range = 1 until AliceInTheWonderland.length
-            while (isActive) {
-                range.forEach {
-                    delay(10)
-                    index = it
-                }
-                delay(2000)
-                range.reversed().forEach {
-                    delay(10)
-                    index = it
-                }
-            }
-        }
+        val text = AliceInTheWonderland
+        val index by rememberTextIndex(text)
 
         Surface(
             shape = RoundedCornerShape(CardCornerRadius),
@@ -62,23 +54,48 @@ fun BookChapterScreen() {
                 .wrapContentHeight(unbounded = true)
         ) {
             TextFlow(
-                text = AliceInTheWonderland.substring(1, index),
+                text = text.substring(1, index),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(SpacingMedium)
             ) {
                 Text(
-                    text = AliceInTheWonderland.substring(0, 1),
+                    text = text.substring(0, 1),
                     fontFamily = FontFamily(Font(R.font.griffin_two_plain)),
-                    fontSize = 74.sp,
+                    fontSize = DropCapFontSize,
                 )
             }
         }
     }
 }
 
+@Composable
+@Suppress("NOTHING_TO_INLINE") // To not create a scope
+private inline fun rememberTextIndex(text: String): State<Int> {
+    val index = remember { mutableStateOf(1) }
+    LaunchedEffect(Unit) {
+        val range = 1 until text.length
+        while (isActive) {
+            range.forEach {
+                delay(TextTypeDelay)
+                index.value = it
+            }
+            delay(TextStillDelay)
+            range.reversed().forEach {
+                delay(TextTypeDelay)
+                index.value = it
+            }
+        }
+    }
+    return index
+}
+
 private val CardCornerRadius: Dp = 16.dp
 private val CardElevation: Dp = 8.dp
+private val DropCapFontSize: TextUnit = 74.sp
+
+private const val TextTypeDelay = 10L
+private const val TextStillDelay = 2_000L
 
 @Suppress("MaxLineLength")
 private val AliceInTheWonderland = """
