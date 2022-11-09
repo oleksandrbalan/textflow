@@ -136,7 +136,10 @@ private fun TextMeasurer.measureTextFlow(
         topBlock = measure(
             text = text,
             style = mergedStyle,
-            size = IntSize(layoutWidth - obstacleSize.width, Int.MAX_VALUE),
+            constraints = Constraints(
+                maxWidth = layoutWidth - obstacleSize.width,
+                maxHeight = Int.MAX_VALUE
+            ),
             overflow = overflow,
             softWrap = softWrap,
             maxLines = maxLines,
@@ -160,7 +163,10 @@ private fun TextMeasurer.measureTextFlow(
         topBlock = measure(
             text = text,
             style = mergedStyle,
-            size = IntSize(layoutWidth - obstacleSize.width, topBlockHeight.toInt()),
+            constraints = Constraints(
+                maxWidth = layoutWidth - obstacleSize.width,
+                maxHeight = topBlockHeight.toInt()
+            ),
             overflow = overflow,
             softWrap = softWrap,
             maxLines = topBlockVisibleLineCount,
@@ -172,7 +178,10 @@ private fun TextMeasurer.measureTextFlow(
         bottomBlock = measure(
             text = text.subSequence(topBlockLastCharIndex + 1, text.length),
             style = mergedStyle,
-            size = IntSize(layoutWidth, Int.MAX_VALUE),
+            constraints = Constraints(
+                maxWidth = layoutWidth,
+                maxHeight = Int.MAX_VALUE
+            ),
             overflow = overflow,
             softWrap = softWrap,
             maxLines = maxLines - topBlockVisibleLineCount,
