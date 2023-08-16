@@ -129,6 +129,7 @@ private fun TextMeasurer.measureTextFlow(
     var topBlock: TextLayoutResult? = null
     var topBlockVisibleLineCount = 0
     var topBlockLastCharIndex = -1
+    var hasBottomBlock = true
 
     // Measure first block only if obstacle is present
     // Otherwise there is noting to wrap and only bottom block will be painted
@@ -158,6 +159,9 @@ private fun TextMeasurer.measureTextFlow(
             )
         )
 
+        // Check if text spans to the bottom block
+        hasBottomBlock = topBlockVisibleLineCount < maxLines && topBlockLastCharIndex < text.length
+
         // Remeasure the top block with it's real height and displayed lines so that we do not have to clip it in canvas
         // and can report the correct text result to the caller
         topBlock = measure(
@@ -167,14 +171,14 @@ private fun TextMeasurer.measureTextFlow(
                 maxWidth = layoutWidth - obstacleSize.width,
                 maxHeight = topBlockHeight.toInt()
             ),
-            overflow = overflow,
+            overflow = if (hasBottomBlock) TextOverflow.Clip else overflow,
             softWrap = softWrap,
             maxLines = topBlockVisibleLineCount,
         )
     }
 
     var bottomBlock: TextLayoutResult? = null
-    if (topBlockVisibleLineCount < maxLines && topBlockLastCharIndex < text.length) {
+    if (hasBottomBlock) {
         bottomBlock = measure(
             text = text.subSequence(topBlockLastCharIndex + 1, text.length),
             style = mergedStyle,
