@@ -107,12 +107,20 @@ internal fun TextFlowCanvas(
     Canvas(modifier = Modifier.size(canvasSize)) {
         // Paint the top text with a horizontal offset
         translate(left = calculateTopBlockOffset(obstacleSize, obstacleAlignment)) {
-            result.topTextResult?.multiParagraph?.paint(drawContext.canvas)
+            result.topTextResult?.multiParagraph?.paint(
+                canvas = drawContext.canvas,
+                color = textColor,
+                decoration = textDecoration,
+            )
         }
 
         // Paint the bottom text moved below by the top text's height
         translate(top = result.topTextHeight.toFloat()) {
-            result.bottomTextResult?.multiParagraph?.paint(drawContext.canvas)
+            result.bottomTextResult?.multiParagraph?.paint(
+                canvas = drawContext.canvas,
+                color = textColor,
+                decoration = textDecoration,
+            )
         }
     }
 }
