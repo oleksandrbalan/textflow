@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -72,7 +73,6 @@ fun AnnotatedStringScreen() {
 }
 
 @Composable
-@Suppress("NOTHING_TO_INLINE") // To not create a scope
 private fun createAnnotatedString(): AnnotatedString {
     val text = listOf(AnnotatedStringTitle, AnnotatedStringText).joinToString(" ")
     val whitespaces = text
@@ -81,8 +81,8 @@ private fun createAnnotatedString(): AnnotatedString {
         .plus(text.length)
         .drop(1)
 
-    var startIndex by remember { mutableStateOf(0) }
-    var endIndex by remember { mutableStateOf(0) }
+    var startIndex by remember { mutableIntStateOf(0) }
+    var endIndex by remember { mutableIntStateOf(0) }
 
     LaunchedEffect(Unit) {
         while (isActive) {
