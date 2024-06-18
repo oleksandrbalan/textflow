@@ -17,7 +17,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
                     example = null
                 }
 
-                Crossfade(targetState = example) { selected ->
+                Crossfade(targetState = example, label = "Crossfade") { selected ->
                     when (selected) {
                         null -> RootScreen(onExampleClick = { example = it })
                         Example.SimpleTextFlow -> SimpleTextFlowScreen()
@@ -72,7 +72,7 @@ private fun RootScreen(onExampleClick: (Example) -> Unit) {
         topBar = { TopBar("Text Flow Demo") }
     ) { padding ->
         LazyColumn(Modifier.padding(padding)) {
-            items(Example.values()) {
+            items(Example.entries) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
@@ -91,7 +91,7 @@ private fun RootScreen(onExampleClick: (Example) -> Unit) {
                         )
                     }
                     Icon(
-                        imageVector = Icons.Default.KeyboardArrowRight,
+                        imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                         contentDescription = null
                     )
                 }

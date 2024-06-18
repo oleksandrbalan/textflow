@@ -36,7 +36,7 @@ private val LightColorPalette = lightColors(
  */
 @Composable
 fun TextFlowTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val sysUiController = rememberSystemUiController()
+    @Suppress("DEPRECATION") val sysUiController = rememberSystemUiController()
     SideEffect {
         sysUiController.setSystemBarsColor(
             color = Color.Transparent,
