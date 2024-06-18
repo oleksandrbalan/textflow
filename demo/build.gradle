@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace "eu.wewox.textflow"
     compileSdk compile_sdk_version
 
     defaultConfig {

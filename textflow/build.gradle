@@ -5,19 +5,16 @@ plugins {
 }
 
 android {
+    namespace "eu.wewox.pagecurl"
     compileSdk compile_sdk_version
 
     defaultConfig {
         minSdk min_sdk_version
-        targetSdk target_sdk_version
-
-        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
     compileOptions {
@@ -35,6 +32,11 @@ android {
         freeCompilerArgs = freeCompilerArgs +
                 "-Xexplicit-api=strict" +
                 "-Xopt-in=androidx.compose.ui.text.ExperimentalTextApi"
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
 }
 
