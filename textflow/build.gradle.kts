@@ -7,11 +7,9 @@ plugins {
 android {
     namespace = "eu.wewox.pagecurl"
     compileSdk = libs.versions.compileSdk.get().toInt()
-
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
     }
-
     buildTypes {
         named("release") {
             isMinifyEnabled = false
@@ -27,12 +25,12 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
-//    kotlinOptions {
-//        jvmTarget = "1.8"
-//        freeCompilerArgs = freeCompilerArgs +
-//                "-Xexplicit-api(=strict" +)
-//                "-Xopt-in=androidx.compose.ui.text.ExperimentalTextApi"
-//    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs = freeCompilerArgs +
+                "-Xexplicit-api=strict" +
+                "-Xopt-in=androidx.compose.ui.text.ExperimentalTextApi"
+    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
