@@ -27,7 +27,7 @@ configure(subprojects) {
     spotless {
         kotlin {
             target("**/*.kt")
-            ktlint("0.43.2")
+            ktlint("1.3.0")
         }
     }
 }
