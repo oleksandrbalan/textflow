@@ -4,9 +4,14 @@ plugins {
     alias(libs.plugins.com.vanniktech.maven.publish)
 }
 
+kotlin {
+    jvmToolchain(libs.versions.java.get().toInt())
+}
+
 android {
     namespace = "eu.wewox.pagecurl"
     compileSdk = libs.versions.compileSdk.get().toInt()
+
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
     }
@@ -16,8 +21,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
         compose = true
@@ -26,7 +31,6 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
     kotlinOptions {
-        jvmTarget = "1.8"
         freeCompilerArgs = freeCompilerArgs +
                 "-Xexplicit-api=strict" +
                 "-Xopt-in=androidx.compose.ui.text.ExperimentalTextApi"

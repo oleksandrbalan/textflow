@@ -3,6 +3,10 @@ plugins {
     alias(libs.plugins.android.application)
 }
 
+kotlin {
+    jvmToolchain(libs.versions.java.get().toInt())
+}
+
 android {
     namespace = "eu.wewox.textflow"
     compileSdk = libs.versions.compileSdk.get().toInt()
@@ -18,7 +22,6 @@ android {
             useSupportLibrary = true
         }
     }
-
     buildTypes {
         named("release") {
             isMinifyEnabled = false
@@ -26,11 +29,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
         compose = true
