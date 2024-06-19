@@ -1,22 +1,24 @@
 [versions]
+minSdk = "24"
+compileSdk = "34"
+targetSdk = "34"
+
 agp = "8.3.2"
 kotlin = "1.9.24"
 compose = "1.6.8"
 compose-compiler = "1.5.14"
 
 [libraries]
-androidx-activity-activity-compose = "androidx.activity:activity-compose:1.9.0"
-androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
-androidx-compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
-androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
-com-google-accompanist-systemuicontroller = "com.google.accompanist:accompanist-systemuicontroller:0.34.0"
+activity-compose = "androidx.activity:activity-compose:1.9.0"
+compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
+compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
+compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+accompanist-systemuicontroller = "com.google.accompanist:accompanist-systemuicontroller:0.34.0"
 
 [plugins]
 android-library = { id = "com.android.library", version.ref = "agp" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 com-diffplug-spotless = "com.diffplug.spotless:6.25.0"
-com-github-ben-manes-versions = "com.github.ben-manes.versions:0.41.0"
 com-vanniktech-maven-publish = "com.vanniktech.maven.publish:0.28.0"
 io-gitlab-arturbosch-detekt = "io.gitlab.arturbosch.detekt:1.23.6"
-nl-littlerobots-version-catalog-update = "nl.littlerobots.version-catalog-update:0.8.4"
