@@ -45,7 +45,7 @@ internal fun TextFlowCanvas(
     fontFamily: FontFamily? = null,
     letterSpacing: TextUnit = TextUnit.Unspecified,
     textDecoration: TextDecoration? = null,
-    textAlign: TextAlign? = null,
+    textAlign: TextAlign = TextAlign.Unspecified,
     lineHeight: TextUnit = TextUnit.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
@@ -61,7 +61,6 @@ internal fun TextFlowCanvas(
     }
 
     // Basically copy-pasta from Text composable
-    @Suppress("DEPRECATION")
     val mergedStyle = style.merge(
         TextStyle(
             color = textColor,
