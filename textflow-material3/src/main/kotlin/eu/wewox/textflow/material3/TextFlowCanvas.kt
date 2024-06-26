@@ -1,10 +1,9 @@
-package eu.wewox.textflow
+package eu.wewox.textflow.material3
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.LocalTextStyle
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -56,7 +55,7 @@ internal fun TextFlowCanvas(
     // Basically copy-pasta from Text composable
     val textColor = color.takeOrElse {
         style.color.takeOrElse {
-            LocalContentColor.current.copy(alpha = LocalContentAlpha.current)
+            LocalContentColor.current
         }
     }
 
