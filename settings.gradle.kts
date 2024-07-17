@@ -18,3 +18,5 @@ dependencyResolutionManagement {
 rootProject.name = "TextFlow"
 include(":demo")
 include(":textflow")
+include(":textflow-material3")
+

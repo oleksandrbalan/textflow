@@ -8,6 +8,7 @@ java = "17"
 agp = "8.3.2"
 kotlin = "1.9.24"
 compose = "1.6.8"
+compose-material3 = "1.2.1"
 compose-compiler = "1.5.14"
 detekt = "1.23.6"
 
@@ -15,6 +16,7 @@ detekt = "1.23.6"
 activity-compose = "androidx.activity:activity-compose:1.9.0"
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
+compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 accompanist-systemuicontroller = "com.google.accompanist:accompanist-systemuicontroller:0.34.0"
 detekt-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
