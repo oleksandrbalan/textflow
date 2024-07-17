@@ -92,7 +92,7 @@ private fun RootScreen(onExampleClick: (Example) -> Unit) {
                     }
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                        contentDescription = null
+                        contentDescription = null,
                     )
                 }
             }
