@@ -167,7 +167,7 @@ public fun TextFlow(
             TextFlowObstacleAlignment.TopStart -> IntOffset.Zero
             TextFlowObstacleAlignment.TopEnd -> IntOffset(
                 constraints.maxWidth - maxObstacleWidth,
-                0
+                0,
             )
         }
 
@@ -197,7 +197,7 @@ public fun TextFlow(
 
         layout(
             width = textPlaceable.width,
-            height = max(maxObstacleHeight, textPlaceable.height)
+            height = max(maxObstacleHeight, textPlaceable.height),
         ) {
             obstaclePlaceables.forEach {
                 it.place(obstacleOffset)

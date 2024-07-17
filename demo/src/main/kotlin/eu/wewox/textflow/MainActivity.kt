@@ -69,7 +69,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun RootScreen(onExampleClick: (Example) -> Unit) {
     Scaffold(
-        topBar = { TopBar("Text Flow Demo") }
+        topBar = { TopBar("Text Flow Demo") },
     ) { padding ->
         LazyColumn(Modifier.padding(padding)) {
             items(Example.entries) {
@@ -78,16 +78,16 @@ private fun RootScreen(onExampleClick: (Example) -> Unit) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable { onExampleClick(it) }
-                        .padding(SpacingMedium)
+                        .padding(SpacingMedium),
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
                             text = it.label,
-                            style = MaterialTheme.typography.h6
+                            style = MaterialTheme.typography.h6,
                         )
                         Text(
                             text = it.description,
-                            style = MaterialTheme.typography.body2
+                            style = MaterialTheme.typography.body2,
                         )
                     }
                     Icon(

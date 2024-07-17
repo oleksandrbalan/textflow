@@ -12,18 +12,18 @@ enum class Example(
 ) {
     SimpleTextFlow(
         "Simple Text Flow",
-        "Basic text flow usage"
+        "Basic text flow usage",
     ),
     BookChapter(
         "Book Chapter",
-        "How text flow can be used to create a Drop Cap"
+        "How text flow can be used to create a Drop Cap",
     ),
     AlignmentAnimation(
         "Alignment Animation",
-        "Alignment change with a scale in-out animation"
+        "Alignment change with a scale in-out animation",
     ),
     AnnotatedString(
         "Annotated String",
-        "Usage of the annotated string in the text flow"
+        "Usage of the annotated string in the text flow",
     ),
 }
