@@ -27,4 +27,8 @@ subprojects {
                 )
         }
     }
+
+    dependencies {
+        detektPlugins(rootProject.libs.detekt.libraries)
+    }
 }

@@ -99,5 +99,5 @@ private val CardElevation: Dp = 8.dp
 private val ObstacleMaxSize = 92.dp
 private const val ObstacleAlignmentChangeDelay = 2_000L
 
-@Suppress("ktlint:standard:max-line-length")
+@Suppress("MaxLineLength", "ktlint:standard:max-line-length")
 private val JetpackCompose = """Jetpack Compose is Android’s modern toolkit for building native UI. It simplifies and accelerates UI development on Android. Quickly bring your app to life with less code, powerful tools, and intuitive Kotlin APIs."""
