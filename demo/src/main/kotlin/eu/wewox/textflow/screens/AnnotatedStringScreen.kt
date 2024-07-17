@@ -16,7 +16,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -54,18 +53,18 @@ fun AnnotatedStringScreen() {
             elevation = CardElevation,
             modifier = Modifier
                 .padding(SpacingLarge)
-                .wrapContentHeight(unbounded = true)
+                .wrapContentHeight(unbounded = true),
         ) {
             TextFlow(
                 text = createAnnotatedString(),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(SpacingMedium)
+                    .padding(SpacingMedium),
             ) {
                 Image(
                     painter = painterResource(R.drawable.image_compose),
                     contentDescription = null,
-                    modifier = Modifier.padding(SpacingXSmall)
+                    modifier = Modifier.padding(SpacingXSmall),
                 )
             }
         }

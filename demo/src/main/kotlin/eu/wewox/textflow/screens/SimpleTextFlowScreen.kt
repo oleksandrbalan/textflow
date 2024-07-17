@@ -38,18 +38,18 @@ fun SimpleTextFlowScreen() {
             elevation = CardElevation,
             modifier = Modifier
                 .padding(SpacingLarge)
-                .wrapContentHeight(unbounded = true)
+                .wrapContentHeight(unbounded = true),
         ) {
             TextFlow(
                 text = JetpackCompose,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(SpacingMedium)
+                    .padding(SpacingMedium),
             ) {
                 Image(
                     painter = painterResource(R.drawable.image_compose),
                     contentDescription = null,
-                    modifier = Modifier.padding(SpacingXSmall)
+                    modifier = Modifier.padding(SpacingXSmall),
                 )
             }
         }
@@ -59,5 +59,5 @@ fun SimpleTextFlowScreen() {
 private val CardCornerRadius: Dp = 16.dp
 private val CardElevation: Dp = 8.dp
 
-@Suppress("MaxLineLength")
+@Suppress("ktlint:standard:max-line-length")
 private val JetpackCompose = """Jetpack Compose is Android’s modern toolkit for building native UI. It simplifies and accelerates UI development on Android. Quickly bring your app to life with less code, powerful tools, and intuitive Kotlin APIs."""

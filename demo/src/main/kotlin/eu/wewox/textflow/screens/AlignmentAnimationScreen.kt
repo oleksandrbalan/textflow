@@ -52,7 +52,7 @@ fun AlignmentAnimationScreen() {
             elevation = CardElevation,
             modifier = Modifier
                 .padding(SpacingLarge)
-                .wrapContentHeight(unbounded = true)
+                .wrapContentHeight(unbounded = true),
         ) {
             var alignment by remember { mutableStateOf(TextFlowObstacleAlignment.TopStart) }
             val size = remember { Animatable(0.dp, Dp.VectorConverter) }
@@ -72,14 +72,14 @@ fun AlignmentAnimationScreen() {
                 obstacleAlignment = alignment,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(SpacingMedium)
+                    .padding(SpacingMedium),
             ) {
                 Image(
                     painter = painterResource(R.drawable.image_compose),
                     contentDescription = null,
                     modifier = Modifier
                         .size(size.value)
-                        .padding(SpacingXSmall)
+                        .padding(SpacingXSmall),
                 )
             }
         }
@@ -99,5 +99,5 @@ private val CardElevation: Dp = 8.dp
 private val ObstacleMaxSize = 92.dp
 private const val ObstacleAlignmentChangeDelay = 2_000L
 
-@Suppress("MaxLineLength")
+@Suppress("ktlint:standard:max-line-length")
 private val JetpackCompose = """Jetpack Compose is Android’s modern toolkit for building native UI. It simplifies and accelerates UI development on Android. Quickly bring your app to life with less code, powerful tools, and intuitive Kotlin APIs."""

@@ -15,6 +15,16 @@ subprojects {
         kotlin {
             target("**/*.kt")
             ktlint("1.3.0")
+                .editorConfigOverride(
+                    mapOf(
+                        "ij_kotlin_allow_trailing_comma" to "true",
+                        "ij_kotlin_allow_trailing_comma_on_call_site" to "true",
+                        "ktlint_code_style" to "android_studio",
+                        "ktlint_standard_property-naming" to "disabled",
+                        "ktlint_standard_class-signature" to "disabled",
+                        "ktlint_function_naming_ignore_when_annotated_with" to "Composable",
+                    ),
+                )
         }
     }
 }
