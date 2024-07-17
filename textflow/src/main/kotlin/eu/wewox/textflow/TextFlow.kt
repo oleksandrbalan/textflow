@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.Paragraph
 import androidx.compose.ui.text.TextLayoutResult
@@ -17,10 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.TextUnit
-import kotlin.math.max
 
 /**
  * The composable to draw a text which flows around an "obstacle". Obstacle can be placed to the start top corner or to
@@ -150,62 +147,38 @@ public fun TextFlow(
     style: TextStyle = LocalTextStyle.current,
     obstacleContent: @Composable () -> Unit = {},
 ) {
-    SubcomposeLayout(modifier) { constraints ->
-        val looseConstraints = constraints.copy(minWidth = 0, minHeight = 0)
-
-        // Measure obstacle(s) first to check how much space they occupy
-        val obstaclePlaceables = subcompose(TextFlowContent.Obstacle, obstacleContent).map {
-            it.measure(looseConstraints)
-        }
-
-        // Take the largest width and height from obstacles
-        val maxObstacleWidth = obstaclePlaceables.maxOfOrNull { it.width } ?: 0
-        val maxObstacleHeight = obstaclePlaceables.maxOfOrNull { it.height } ?: 0
-
-        // And calculate an offset for obstacle(s)
-        val obstacleOffset = when (obstacleAlignment) {
-            TextFlowObstacleAlignment.TopStart -> IntOffset.Zero
-            TextFlowObstacleAlignment.TopEnd -> IntOffset(
-                constraints.maxWidth - maxObstacleWidth,
-                0,
-            )
-        }
-
-        // Then measure the text canvas with the given obstacle
-        val textPlaceable = subcompose(TextFlowContent.Text) {
-            TextFlowCanvas(
-                text = text,
-                obstacleSize = IntSize(maxObstacleWidth, maxObstacleHeight),
-                obstacleAlignment = obstacleAlignment,
-                constraints = constraints,
-                color = color,
-                fontSize = fontSize,
-                fontStyle = fontStyle,
-                fontWeight = fontWeight,
-                fontFamily = fontFamily,
-                letterSpacing = letterSpacing,
-                textDecoration = textDecoration,
-                textAlign = textAlign,
-                lineHeight = lineHeight,
-                overflow = overflow,
-                softWrap = softWrap,
-                maxLines = maxLines,
-                onTextLayout = onTextLayout,
-                style = style,
-            )
-        }.first().measure(looseConstraints)
-
-        layout(
-            width = textPlaceable.width,
-            height = max(maxObstacleHeight, textPlaceable.height),
-        ) {
-            obstaclePlaceables.forEach {
-                it.place(obstacleOffset)
-            }
-
-            textPlaceable.place(0, 0)
+    val textColor = color.takeOrElse {
+        style.color.takeOrElse {
+            LocalContentColor.current
         }
     }
+
+    val layoutObstacleAlignment: TextFlowLayoutObstacleAlignment =
+        when (obstacleAlignment) {
+            TextFlowObstacleAlignment.TopStart -> TextFlowLayoutObstacleAlignment.TopStart
+            TextFlowObstacleAlignment.TopEnd -> TextFlowLayoutObstacleAlignment.TopEnd
+        }
+
+    TextFlowLayout(
+        text = text,
+        style = style,
+        modifier = modifier,
+        obstacleAlignment = layoutObstacleAlignment,
+        color = textColor,
+        fontSize = fontSize,
+        fontStyle = fontStyle,
+        fontWeight = fontWeight,
+        fontFamily = fontFamily,
+        letterSpacing = letterSpacing,
+        textDecoration = textDecoration,
+        textAlign = textAlign,
+        lineHeight = lineHeight,
+        overflow = overflow,
+        softWrap = softWrap,
+        maxLines = maxLines,
+        onTextLayout = onTextLayout,
+        obstacleContent = obstacleContent,
+    )
 }
 
 /**
@@ -222,5 +195,3 @@ public enum class TextFlowObstacleAlignment {
      */
     TopEnd,
 }
-
-private enum class TextFlowContent { Obstacle, Text }

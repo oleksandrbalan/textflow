@@ -2,15 +2,11 @@ package eu.wewox.textflow
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.translate
-import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.PlatformTextStyle
@@ -36,8 +32,9 @@ import androidx.compose.ui.unit.constrainWidth
 internal fun TextFlowCanvas(
     text: AnnotatedString,
     obstacleSize: IntSize,
-    obstacleAlignment: TextFlowObstacleAlignment,
+    obstacleAlignment: TextFlowLayoutObstacleAlignment,
     constraints: Constraints,
+    style: TextStyle,
     color: Color = Color.Unspecified,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
@@ -51,19 +48,11 @@ internal fun TextFlowCanvas(
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult?, TextLayoutResult?) -> Unit = { _, _ -> },
-    style: TextStyle = LocalTextStyle.current,
 ) {
-    // Basically copy-pasta from Text composable
-    val textColor = color.takeOrElse {
-        style.color.takeOrElse {
-            LocalContentColor.current.copy(alpha = LocalContentAlpha.current)
-        }
-    }
-
     // Basically copy-pasta from Text composable
     val mergedStyle = style.merge(
         TextStyle(
-            color = textColor,
+            color = color,
             fontSize = fontSize,
             fontWeight = fontWeight,
             textAlign = textAlign,
@@ -108,7 +97,7 @@ internal fun TextFlowCanvas(
         translate(left = calculateTopBlockOffset(obstacleSize, obstacleAlignment)) {
             result.topTextResult?.multiParagraph?.paint(
                 canvas = drawContext.canvas,
-                color = textColor,
+                color = color,
                 decoration = textDecoration,
             )
         }
@@ -117,7 +106,7 @@ internal fun TextFlowCanvas(
         translate(top = result.topTextHeight.toFloat()) {
             result.bottomTextResult?.multiParagraph?.paint(
                 canvas = drawContext.canvas,
-                color = textColor,
+                color = color,
                 decoration = textDecoration,
             )
         }
@@ -237,8 +226,8 @@ private fun calculateCanvasSize(
 
 private fun calculateTopBlockOffset(
     obstacleSize: IntSize,
-    obstacleAlignment: TextFlowObstacleAlignment,
-): Float = if (obstacleAlignment == TextFlowObstacleAlignment.TopStart) {
+    obstacleAlignment: TextFlowLayoutObstacleAlignment,
+): Float = if (obstacleAlignment == TextFlowLayoutObstacleAlignment.TopStart) {
     obstacleSize.width.toFloat()
 } else {
     0f
