@@ -36,12 +36,13 @@ private val LightColorPalette = lightColors(
  */
 @Composable
 fun TextFlowTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+    @Suppress("DEPRECATION")
     val sysUiController = rememberSystemUiController()
     SideEffect {
         sysUiController.setSystemBarsColor(
             color = Color.Transparent,
             darkIcons = !darkTheme,
-            isNavigationBarContrastEnforced = false
+            isNavigationBarContrastEnforced = false,
         )
     }
 
@@ -55,6 +56,6 @@ fun TextFlowTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composab
         colors = colors,
         typography = Typography(),
         shapes = Shapes(),
-        content = content
+        content = content,
     )
 }

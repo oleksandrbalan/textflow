@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,13 +51,13 @@ fun BookChapterScreen() {
             elevation = CardElevation,
             modifier = Modifier
                 .padding(SpacingLarge)
-                .wrapContentHeight(unbounded = true)
+                .wrapContentHeight(unbounded = true),
         ) {
             TextFlow(
                 text = text.substring(1, index),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(SpacingMedium)
+                    .padding(SpacingMedium),
             ) {
                 Text(
                     text = text.substring(0, 1),
@@ -72,18 +72,18 @@ fun BookChapterScreen() {
 @Composable
 @Suppress("NOTHING_TO_INLINE") // To not create a scope
 private inline fun rememberTextIndex(text: String): State<Int> {
-    val index = remember { mutableStateOf(1) }
+    val index = remember { mutableIntStateOf(1) }
     LaunchedEffect(Unit) {
         val range = 1 until text.length
         while (isActive) {
             range.forEach {
                 delay(TextTypeDelay)
-                index.value = it
+                index.intValue = it
             }
             delay(TextStillDelay)
             range.reversed().forEach {
                 delay(TextTypeDelay)
-                index.value = it
+                index.intValue = it
             }
         }
     }

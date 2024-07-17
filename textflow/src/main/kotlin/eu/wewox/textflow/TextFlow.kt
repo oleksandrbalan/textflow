@@ -3,6 +3,7 @@ package eu.wewox.textflow
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.SubcomposeLayout
@@ -65,7 +66,7 @@ public fun TextFlow(
     fontFamily: FontFamily? = null,
     letterSpacing: TextUnit = TextUnit.Unspecified,
     textDecoration: TextDecoration? = null,
-    textAlign: TextAlign? = null,
+    textAlign: TextAlign = TextAlign.Unspecified,
     lineHeight: TextUnit = TextUnit.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
@@ -75,7 +76,7 @@ public fun TextFlow(
     obstacleContent: @Composable () -> Unit = {},
 ) {
     TextFlow(
-        text = AnnotatedString(text),
+        text = remember(text) { AnnotatedString(text) },
         modifier = modifier,
         obstacleAlignment = obstacleAlignment,
         color = color,
@@ -140,7 +141,7 @@ public fun TextFlow(
     fontFamily: FontFamily? = null,
     letterSpacing: TextUnit = TextUnit.Unspecified,
     textDecoration: TextDecoration? = null,
-    textAlign: TextAlign? = null,
+    textAlign: TextAlign = TextAlign.Unspecified,
     lineHeight: TextUnit = TextUnit.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
@@ -164,7 +165,10 @@ public fun TextFlow(
         // And calculate an offset for obstacle(s)
         val obstacleOffset = when (obstacleAlignment) {
             TextFlowObstacleAlignment.TopStart -> IntOffset.Zero
-            TextFlowObstacleAlignment.TopEnd -> IntOffset(constraints.maxWidth - maxObstacleWidth, 0)
+            TextFlowObstacleAlignment.TopEnd -> IntOffset(
+                constraints.maxWidth - maxObstacleWidth,
+                0,
+            )
         }
 
         // Then measure the text canvas with the given obstacle
@@ -193,7 +197,7 @@ public fun TextFlow(
 
         layout(
             width = textPlaceable.width,
-            height = max(maxObstacleHeight, textPlaceable.height)
+            height = max(maxObstacleHeight, textPlaceable.height),
         ) {
             obstaclePlaceables.forEach {
                 it.place(obstacleOffset)

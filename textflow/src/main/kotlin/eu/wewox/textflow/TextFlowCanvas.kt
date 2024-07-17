@@ -45,7 +45,7 @@ internal fun TextFlowCanvas(
     fontFamily: FontFamily? = null,
     letterSpacing: TextUnit = TextUnit.Unspecified,
     textDecoration: TextDecoration? = null,
-    textAlign: TextAlign? = null,
+    textAlign: TextAlign = TextAlign.Unspecified,
     lineHeight: TextUnit = TextUnit.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
@@ -61,7 +61,6 @@ internal fun TextFlowCanvas(
     }
 
     // Basically copy-pasta from Text composable
-    @Suppress("DEPRECATION")
     val mergedStyle = style.merge(
         TextStyle(
             color = textColor,
@@ -75,7 +74,7 @@ internal fun TextFlowCanvas(
             letterSpacing = letterSpacing,
             // However we need to disable font padding to align both text paragraphs perfectly
             platformStyle = PlatformTextStyle(false),
-        )
+        ),
     )
 
     // Prepare text measurer instance to measure text based on constraints
@@ -101,7 +100,7 @@ internal fun TextFlowCanvas(
         density = LocalDensity.current,
         result = result,
         obstacleSize = obstacleSize,
-        constraints = constraints
+        constraints = constraints,
     )
 
     Canvas(modifier = Modifier.size(canvasSize)) {
@@ -147,7 +146,7 @@ private fun TextMeasurer.measureTextFlow(
             style = mergedStyle,
             constraints = Constraints(
                 maxWidth = layoutWidth - obstacleSize.width,
-                maxHeight = Int.MAX_VALUE
+                maxHeight = Int.MAX_VALUE,
             ),
             overflow = overflow,
             softWrap = softWrap,
@@ -163,8 +162,8 @@ private fun TextMeasurer.measureTextFlow(
         topBlockLastCharIndex = topBlock.getOffsetForPosition(
             Offset(
                 topBlock.getLineRight(lastVisibleLineIndex),
-                topBlock.getLineTop(lastVisibleLineIndex)
-            )
+                topBlock.getLineTop(lastVisibleLineIndex),
+            ),
         )
 
         // Check if text spans to the bottom block
@@ -177,7 +176,7 @@ private fun TextMeasurer.measureTextFlow(
             style = mergedStyle,
             constraints = Constraints(
                 maxWidth = layoutWidth - obstacleSize.width,
-                maxHeight = topBlockHeight.toInt()
+                maxHeight = topBlockHeight.toInt(),
             ),
             overflow = if (hasBottomBlock) TextOverflow.Clip else overflow,
             softWrap = softWrap,
@@ -192,7 +191,7 @@ private fun TextMeasurer.measureTextFlow(
             style = mergedStyle,
             constraints = Constraints(
                 maxWidth = layoutWidth,
-                maxHeight = Int.MAX_VALUE
+                maxHeight = Int.MAX_VALUE,
             ),
             overflow = overflow,
             softWrap = softWrap,
@@ -216,7 +215,7 @@ private fun calculateCanvasSize(
     density: Density,
     result: TextFlowCanvasLayoutResult,
     obstacleSize: IntSize,
-    constraints: Constraints
+    constraints: Constraints,
 ): DpSize {
     val width = if (result.topTextResult != null) {
         obstacleSize.width + result.topTextResult.size.width
@@ -231,7 +230,7 @@ private fun calculateCanvasSize(
     return with(density) {
         DpSize(
             width = constraints.constrainWidth(width).toDp(),
-            height = constraints.constrainHeight(height).toDp()
+            height = constraints.constrainHeight(height).toDp(),
         )
     }
 }
@@ -239,12 +238,11 @@ private fun calculateCanvasSize(
 private fun calculateTopBlockOffset(
     obstacleSize: IntSize,
     obstacleAlignment: TextFlowObstacleAlignment,
-): Float =
-    if (obstacleAlignment == TextFlowObstacleAlignment.TopStart) {
-        obstacleSize.width.toFloat()
-    } else {
-        0f
-    }
+): Float = if (obstacleAlignment == TextFlowObstacleAlignment.TopStart) {
+    obstacleSize.width.toFloat()
+} else {
+    0f
+}
 
 private class TextFlowCanvasLayoutResult(
     val topTextResult: TextLayoutResult?,

@@ -20,6 +20,6 @@ fun TopBar(title: String) {
         style = MaterialTheme.typography.h4,
         modifier = Modifier
             .padding(SpacingMedium)
-            .statusBarsPadding()
+            .statusBarsPadding(),
     )
 }
