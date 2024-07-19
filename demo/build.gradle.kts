@@ -1,10 +1,7 @@
 plugins {
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.android.application)
-}
-
-kotlin {
-    jvmToolchain(libs.versions.java.get().toInt())
+    alias(libs.plugins.kotlin)
+    id("convention.jvm.toolchain")
 }
 
 android {
@@ -28,10 +25,6 @@ android {
             setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"))
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
     buildFeatures {
         compose = true
     }
@@ -47,10 +40,14 @@ android {
 
 dependencies {
     implementation(project(":textflow"))
+    implementation(project(":textflow-material3"))
 
+    implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
-    implementation(libs.compose.foundation)
     implementation(libs.compose.material)
-    implementation(libs.accompanist.systemuicontroller)
-    implementation(libs.activity.compose)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.uitooling)
+    implementation(libs.compose.uitoolingpreview)
+    implementation(libs.androidx.activitycompose)
+    implementation(libs.androidx.splashscreen)
 }

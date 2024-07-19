@@ -1,11 +1,8 @@
 plugins {
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.android.library)
-    alias(libs.plugins.com.vanniktech.maven.publish)
-}
-
-kotlin {
-    jvmToolchain(libs.versions.java.get().toInt())
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.mavenpublish)
+    id("convention.jvm.toolchain")
 }
 
 android {
@@ -14,15 +11,6 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-    }
-    buildTypes {
-        named("release") {
-            isMinifyEnabled = false
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
         compose = true
@@ -35,17 +23,12 @@ android {
                 "-Xexplicit-api=strict" +
                 "-Xopt-in=androidx.compose.ui.text.ExperimentalTextApi"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
     implementation(project(":textflow-common"))
 
+    implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
-    implementation(libs.compose.foundation)
     implementation(libs.compose.material)
 }
