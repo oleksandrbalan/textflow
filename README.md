@@ -1,4 +1,5 @@
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.oleksandrbalan/textflow.svg?label=Maven%20Central)](https://search.maven.org/artifact/io.github.oleksandrbalan/textflow)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.oleksandrbalan/textflow.svg?label=Material%202)](https://search.maven.org/artifact/io.github.oleksandrbalan/textflow)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.oleksandrbalan/textflow-material3.svg?label=Material%203)](https://central.sonatype.com/artifact/io.github.oleksandrbalan/textflow-material3)
 
 <img align="right" src="https://user-images.githubusercontent.com/20944869/192884656-f962028f-cbd5-4b24-91ee-2ad50bda1e5c.png">
 
@@ -7,6 +8,8 @@
 Text Flow library for Jetpack Compose.
 
 Allows to display a text which wraps around an image (or any other Composable).
+
+From version 1.2.0 now supports both Material 2 and Material 3 themes.
 
 ## Examples
 
@@ -57,7 +60,11 @@ dependencyResolutionManagement {
 Check latest version on the [releases page](https://github.com/oleksandrbalan/textflow/releases).
 ```
 dependencies {
+    // For Material 2 theme
     implementation "io.github.oleksandrbalan:textflow:$version"
+
+    // For Material 3 theme
+    implementation "io.github.oleksandrbalan:textflow-material3:$version"
 }
 ```
 
