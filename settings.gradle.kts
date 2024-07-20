@@ -1,6 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         gradlePluginPortal()
         google()
@@ -19,4 +20,5 @@ rootProject.name = "TextFlow"
 include(":demo")
 include(":textflow")
 include(":textflow-material3")
+include(":textflow-common")
 

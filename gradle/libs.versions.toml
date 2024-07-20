@@ -3,28 +3,35 @@ minSdk = "24"
 compileSdk = "34"
 targetSdk = "34"
 
-java = "17"
-
-agp = "8.3.2"
-kotlin = "1.9.24"
-compose = "1.6.8"
-compose-material3 = "1.2.1"
+compose-bom = "2024.06.00"
 compose-compiler = "1.5.14"
-detekt = "1.23.6"
+activity-compose = "1.9.0"
+core-splashscreen = "1.0.1"
+
+plugin-android-gradle = "8.5.1"
+plugin-kotlin = "1.9.24"
+plugin-detekt = "1.23.6"
+plugin-spotless = "6.25.0"
+plugin-mavenpublish = "0.28.0"
+
+java-toolchain = "17"
 
 [libraries]
-activity-compose = "androidx.activity:activity-compose:1.9.0"
-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
-compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
-accompanist-systemuicontroller = "com.google.accompanist:accompanist-systemuicontroller:0.34.0"
-detekt-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
+compose-material = { module = "androidx.compose.material:material" }
+compose-material3 = { module = "androidx.compose.material3:material3" }
+compose-ui = { module = "androidx.compose.ui:ui" }
+compose-foundation = { module = "androidx.compose.foundation:foundation" }
+compose-uitooling = { module = "androidx.compose.ui:ui-tooling" }
+compose-uitoolingpreview = { module = "androidx.compose.ui:ui-tooling-preview" }
+androidx-activitycompose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
+androidx-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "core-splashscreen" }
+detekt-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "plugin-detekt" }
 
 [plugins]
-android-library = { id = "com.android.library", version.ref = "agp" }
-android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-com-diffplug-spotless = "com.diffplug.spotless:6.25.0"
-com-vanniktech-maven-publish = "com.vanniktech.maven.publish:0.28.0"
-io-gitlab-arturbosch-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+android-application = { id = "com.android.application", version.ref = "plugin-android-gradle" }
+android-library = { id = "com.android.library", version.ref = "plugin-android-gradle" }
+kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "plugin-kotlin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "plugin-detekt" }
+spotless = { id = "com.diffplug.spotless", version.ref = "plugin-spotless" }
+mavenpublish = { id = "com.vanniktech.maven.publish", version.ref = "plugin-mavenpublish" }

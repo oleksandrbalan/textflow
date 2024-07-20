@@ -1,12 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin)
-    alias(libs.plugins.mavenpublish)
     id("convention.jvm.toolchain")
 }
 
 android {
-    namespace = "eu.wewox.textflow.material3"
+    namespace = "eu.wewox.textflow"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -26,9 +25,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":textflow-common"))
-
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
-    implementation(libs.compose.material3)
+    implementation(libs.compose.foundation)
 }

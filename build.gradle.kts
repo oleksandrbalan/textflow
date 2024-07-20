@@ -1,15 +1,18 @@
+import com.diffplug.gradle.spotless.SpotlessPlugin
+import io.gitlab.arturbosch.detekt.DetektPlugin
+
 plugins {
-    alias(libs.plugins.kotlin.android) apply false
-    alias(libs.plugins.android.library) apply false
     alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.io.gitlab.arturbosch.detekt)
-    alias(libs.plugins.com.diffplug.spotless)
-    alias(libs.plugins.com.vanniktech.maven.publish)
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin) apply false
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.spotless)
+    alias(libs.plugins.mavenpublish)
 }
 
 subprojects {
-    apply(plugin = rootProject.libs.plugins.com.diffplug.spotless.get().pluginId)
-    apply(plugin = rootProject.libs.plugins.io.gitlab.arturbosch.detekt.get().pluginId)
+    apply<DetektPlugin>()
+    apply<SpotlessPlugin>()
 
     spotless {
         kotlin {
@@ -22,6 +25,7 @@ subprojects {
                         "ktlint_code_style" to "android_studio",
                         "ktlint_standard_property-naming" to "disabled",
                         "ktlint_standard_class-signature" to "disabled",
+                        "ktlint_standard_function-signature" to "disabled",
                         "ktlint_function_naming_ignore_when_annotated_with" to "Composable",
                     ),
                 )
