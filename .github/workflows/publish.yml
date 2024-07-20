@@ -32,7 +32,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: publish
-        run: ./gradlew publish --no-daemon --no-parallel --stacktrace --info
+        run: ./gradlew publishAndReleaseToMavenCentral --no-daemon --no-parallel --no-configuration-cache
         env: 
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
